@@ -11,11 +11,13 @@ public class Resultados
     }
 
     public Participante getGanador()
+
     {
         return ganador;
     }
     public double getPromedioTiempo()
-    { return promedioTiempo;
+    {
+        return promedioTiempo;
     }
 
     @Override

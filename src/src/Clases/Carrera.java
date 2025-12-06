@@ -2,34 +2,39 @@ package Clases;
 
 import java.util.ArrayList;
 
-public class Carrera
-{
-private String nombreCarrera;
-private double distancia; //metros o km
-private ArrayList<Participante> participantes;
+public class Carrera {
 
-    public Carrera(String nombreCarrera, double distancia, ArrayList<Participante> participantes) {
+    private String nombreCarrera;
+    private double distancia;
+    private ArrayList<Participante> participantes;
+
+
+    public Carrera(String nombreCarrera, double distancia) {
         this.nombreCarrera = nombreCarrera;
-        this.distancia= distancia;
-        this.participantes = participantes;
-    }
-    public void agregarParticipante(Participante p) {
-        participantes.add(p);
+        this.distancia = distancia;
+        this.participantes = new ArrayList<>();
     }
 
-    public ArrayList<Participante> getParticipantes() {
+    // Getters
+    public String getNombreCarrera()
+    {
+        return nombreCarrera;
+    }
+    public double getDistancia()
+    {
+        return distancia;
+    }
+    public ArrayList<Participante> getParticipantes()
+    {
         return participantes;
     }
 
-    public String getNombreCarrera() { return nombreCarrera; }
-    public double getDistancia() { return distancia; }
+    public void agregarParticipante(Participante p){
+        participantes.add(p);
+    }
 
     @Override
     public String toString() {
-        return "Carrera{" +
-                "Nombre='" + nombreCarrera + '\'' +
-                ", Distancia=" + distancia +
-                ", Participantes=" + participantes.size() +
-                '}';
+        return nombreCarrera + " ("+distancia+" km)";
     }
 }

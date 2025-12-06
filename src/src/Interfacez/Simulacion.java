@@ -6,10 +6,10 @@ import java.awt.event.ActionListener;
 
 public class Simulacion {
     private JPanel mainPanel;
-    private JButton iniciarButton;
-    private JButton pausaButton;
-    private JButton reiniciarButton;
-    private JButton volverButton;
+    public JButton iniciarButton;
+    public JButton pausaButton;
+    public JButton reiniciarButton;
+    public JButton volverButton;
 
     public Simulacion() {
         iniciarButton.addActionListener(new ActionListener() {
@@ -36,5 +36,8 @@ public class Simulacion {
 
             }
         });
+    }
+    public JPanel getMainPanel() {
+        return this.mainPanel;
     }
 }

@@ -6,8 +6,9 @@ import java.awt.event.ActionListener;
 
 public class Estadisticas {
     private JPanel Estadisticas;
-    private JButton calcularEstadisticasButton;
-    private JButton volverButton;
+    public JButton calcularEstadisticasButton;
+    public JButton volverButton;
+    private JPanel mainPanel;
 
     public Estadisticas() {
         calcularEstadisticasButton.addActionListener(new ActionListener() {
@@ -22,5 +23,8 @@ public class Estadisticas {
 
             }
         });
+    }
+    public JPanel getMainPanel() {
+        return this.mainPanel;
     }
 }
