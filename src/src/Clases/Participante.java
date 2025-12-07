@@ -1,6 +1,8 @@
 package Clases;
 
-public class Participante {
+import java.io.Serializable;
+
+public class Participante implements Serializable {
 
     private String nombre;
     private int edad;

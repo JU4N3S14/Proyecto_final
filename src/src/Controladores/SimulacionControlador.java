@@ -1,4 +1,6 @@
 package Controladores;
 
-public class SimulacionControlador {
+public class SimulacionControlador
+{
+
 }

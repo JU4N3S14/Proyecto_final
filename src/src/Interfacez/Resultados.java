@@ -5,25 +5,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class Resultados {
-    private JPanel mainPanel;
-    private JTable table1;
+    public JPanel mainPanel;
+    public JTable table1;
     public JButton exportarTxtButton;
     public JButton volverButton;
-
-    public Resultados() {
-        exportarTxtButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-            }
-        });
-        volverButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-            }
-        });
-    }
+    public JLabel labelGanador;
+    public JLabel labelSegundo;
+    public JLabel labelTercero;
 
     public JPanel getMainPanel() {
         return this.mainPanel;

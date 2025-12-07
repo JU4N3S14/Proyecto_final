@@ -8,22 +8,14 @@ public class Estadisticas {
     private JPanel Estadisticas;
     public JButton calcularEstadisticasButton;
     public JButton volverButton;
-    private JPanel mainPanel;
+    public JLabel jlabelTitulo;
+    public JLabel labelPodios;
+    public JLabel labelPomedio;
+    public JLabel labelGeneral;
+    public JLabel LabelTotal;
+    public JPanel mainPanel;
 
-    public Estadisticas() {
-        calcularEstadisticasButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
 
-            }
-        });
-        volverButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-            }
-        });
-    }
     public JPanel getMainPanel() {
         return this.mainPanel;
     }

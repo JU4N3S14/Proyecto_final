@@ -1,8 +1,9 @@
 package Clases;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Carrera {
+public class Carrera implements Serializable {
 
     private String nombreCarrera;
     private double distancia;
