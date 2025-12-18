@@ -1,5 +1,6 @@
 package Controladores;
 
+import Interfacez.MenuPrincipal;
 import Interfacez.Resultados;
 import Clases.Carrera;
 
@@ -23,8 +24,11 @@ public class ResultadosControlador {
         this.carrera = carrera;
         this.listaGlobalCarreras = listaGlobalCarreras;
 
-        cargarGanadores();
-        cargarTabla();
+        if(carrera != null){
+            cargarGanadores();
+            cargarTabla();
+        }
+
         initListeners();
     }
 
@@ -32,10 +36,9 @@ public class ResultadosControlador {
 
         // volver a ventana carreras
         vista.volverButton.addActionListener(e -> {
-            Interfacez.Carrera menuCarrera = new Interfacez.Carrera();
-            new CarreraControlador(menuCarrera, frame, listaGlobalCarreras);
-
-            frame.setContentPane(menuCarrera.getMainPanel());
+            MenuPrincipal menu = new MenuPrincipal();
+            new MenuPrincipalControlador(menu, frame);
+            frame.setContentPane(menu.getMainPanel());
             frame.revalidate();
             frame.repaint();
         });

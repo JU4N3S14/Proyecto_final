@@ -57,6 +57,7 @@ public class MenuPrincipalControlador {
         // resultados
         vista.mostarPodiosButton.addActionListener(e -> {
             Resultados res = new Resultados();
+            new ResultadosControlador(res, frameContenedor, null, listaGlobalCarreras);
             cambiarVista(res.getMainPanel());
         });
 
