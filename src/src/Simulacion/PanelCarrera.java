@@ -2,6 +2,7 @@ package Simulacion;
 import Clases.Participante;
 
 import javax.swing.*;
+import java.awt.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
@@ -11,7 +12,8 @@ public class PanelCarrera extends JPanel
     List<Participante> participantes;
     private HashMap<Participante, Integer> posiciones;
     private HashMap<Participante, Integer> velocidades;
-
+    private Image imagenPato;
+    private Image imagenPista;
     private final int Meta_X = 700;
     private boolean carreraFinalizada = false;
 
@@ -19,6 +21,12 @@ public class PanelCarrera extends JPanel
         this.participantes = participantes;
         posiciones = new HashMap<>();
         velocidades = new HashMap<>();
+        try{
+            imagenPato = new ImageIcon("src/Recursos/pato_.PNG").getImage();
+            imagenPista = new ImageIcon("src/Recursos/Pista.png").getImage();
+        } catch (Exception e){
+            System.out.println("Error al cargar las imagenes: " + e.getMessage());
+        }
 
         Random r = new Random();
         int y = 50;
@@ -80,23 +88,34 @@ public class PanelCarrera extends JPanel
 
     protected void paintComponent(java.awt.Graphics g) {
         super.paintComponent(g);
-        // Dibujar pista
-        g.setColor(java.awt.Color.LIGHT_GRAY);
-        g.fillRect(0, 0, 800, 400);
 
-        // Dibujar meta
-        g.setColor(java.awt.Color.RED);
-        g.fillRect(Meta_X, 0, 10, 400);
+        // Fondo pista
+        if (imagenPista != null) {
+            g.drawImage(imagenPista, 0, 0, getWidth(), getHeight(), this);
+        } else {
+            g.setColor(Color.LIGHT_GRAY);
+            g.fillRect(0, 0, getWidth(), getHeight());
+        }
 
-        // Dibujar corredores
+        // Meta
+        g.setColor(Color.RED);
+        g.fillRect(Meta_X, 0, 10, getHeight());
+
+        // Patos
         int y = 50;
-        for(Participante p : participantes){
+        for (Participante p : participantes) {
             int x = posiciones.get(p);
-            g.setColor(java.awt.Color.BLUE);
-            g.fillOval(x, y, 30, 30);
-            g.setColor(java.awt.Color.BLACK);
-            g.drawString(p.getNombre(), x, y - 10);
-            y += 50;
+
+            if (imagenPato != null) {
+                g.drawImage(imagenPato, x, y, 40, 40, this);
+            } else {
+                g.setColor(Color.BLUE);
+                g.fillOval(x, y, 30, 30);
+            }
+
+            g.setColor(Color.BLACK);
+            g.drawString(p.getNombre(), x, y - 5);
+            y += 60;
         }
     }
 
