@@ -21,12 +21,29 @@ public class PanelCarrera extends JPanel
         this.participantes = participantes;
         posiciones = new HashMap<>();
         velocidades = new HashMap<>();
-        try{
-            imagenPato = new ImageIcon("src/Recursos/pato_.PNG").getImage();
-            imagenPista = new ImageIcon("src/Recursos/Pista.png").getImage();
-        } catch (Exception e){
-            System.out.println("Error al cargar las imagenes: " + e.getMessage());
+
+        try {
+            imagenPato = new ImageIcon(
+                    getClass().getResource("/Recursos/pato_.png")
+            ).getImage();
+
+            imagenPista = new ImageIcon(
+                    getClass().getResource("/Recursos/Pista.png")
+            ).getImage();
+
+        } catch (Exception e) {
+            System.out.println("Error al cargar imágenes");
+            e.printStackTrace();
         }
+
+        for (Participante p : participantes) {
+            posiciones.put(p, 20);
+            int velocidad = 5 + (int)(Math.random() * 6);
+            velocidades.put(p, velocidad);
+        }
+
+        setPreferredSize(new Dimension(800, 400));
+        setOpaque(true);
 
         Random r = new Random();
         int y = 50;
