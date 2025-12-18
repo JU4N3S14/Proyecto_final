@@ -15,6 +15,7 @@ public class MenuPrincipalControlador {
 
     private MenuPrincipal vista;
     private JFrame frameContenedor;
+    private Clases.Carrera carreraSeleccionada;
 
     // lista global donde se guardan todas las carreras de la aplicacion
     private List<Clases.Carrera> listaGlobalCarreras;
@@ -50,8 +51,30 @@ public class MenuPrincipalControlador {
 
         // simulacion
         vista.simulacionButton.addActionListener(e -> {
+            if (listaGlobalCarreras == null || listaGlobalCarreras.isEmpty()) {
+                JOptionPane.showMessageDialog(
+                        frameContenedor,
+                        "Porfavor antes seleccione una carrera"
+                );
+                return;
+            }
+
+            // Tomamos la última carrera (la más reciente / simulada)
+            Clases.Carrera carrera = listaGlobalCarreras.getLast();
+
+            if (carrera.getParticipantes().isEmpty()) {
+                JOptionPane.showMessageDialog(
+                        frameContenedor,
+                        "La carrera no tiene participantes"
+                );
+                return;
+            }
+
             Simulacion sim = new Simulacion();
+            new SimulacionControlador(sim, frameContenedor, carrera);
             cambiarVista(sim.getMainPanel());
+
+
         });
 
         // resultados
@@ -65,6 +88,7 @@ public class MenuPrincipalControlador {
         vista.estadisticasButton.addActionListener(e -> {
             Estadisticas est = new Estadisticas();
             new EstadisticaControlador(est, frameContenedor, listaGlobalCarreras);
+            System.out.println(est.getMainPanel());
             cambiarVista(est.getMainPanel());
         });
 
@@ -77,4 +101,14 @@ public class MenuPrincipalControlador {
         frameContenedor.revalidate();
         frameContenedor.repaint();
     }
+
+    public void setCarreraSeleccionada(Clases.Carrera carrera) {
+        this.carreraSeleccionada = carrera;
+    }
+
+    public List<Clases.Carrera> getListaGlobalCarreras() {
+        return listaGlobalCarreras;
+    }
+
+
 }

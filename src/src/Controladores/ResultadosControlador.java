@@ -21,12 +21,21 @@ public class ResultadosControlador {
     public ResultadosControlador(Resultados vista, JFrame frame, Carrera carrera, List<Carrera> listaGlobalCarreras) {
         this.vista = vista;
         this.frame = frame;
-        this.carrera = carrera;
         this.listaGlobalCarreras = listaGlobalCarreras;
 
-        if(carrera != null){
+        // Si no viene una carrera directa, usar la última simulada
+        if (carrera == null && listaGlobalCarreras != null && !listaGlobalCarreras.isEmpty()) {
+            this.carrera = listaGlobalCarreras.get(listaGlobalCarreras.size() - 1);
+        } else {
+            this.carrera = carrera;
+        }
+
+        if (this.carrera != null) {
             cargarGanadores();
             cargarTabla();
+        } else {
+            JOptionPane.showMessageDialog(frame,
+                    "No hay carreras simuladas para mostrar resultados");
         }
 
         initListeners();
@@ -92,4 +101,5 @@ public class ResultadosControlador {
             JOptionPane.showMessageDialog(frame,"Error al guardar archivo");
         }
     }
+
 }

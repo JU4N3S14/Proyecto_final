@@ -17,6 +17,8 @@ public class EstadisticaControlador {
         this.frame = frame;
         this.listaCarreras = listaCarreras;
 
+
+
         initListeners();
     }
 
@@ -47,8 +49,7 @@ public class EstadisticaControlador {
         // Participante con mas podios
         Map<String, Integer> podios = new HashMap<>();
         for(Carrera c : listaCarreras){
-            List<Participante> p = c.getParticipantes();
-            p.sort(Comparator.comparingDouble(Participante::getTiempoCarrera));
+            List<Participante> p = new ArrayList<>(c.getParticipantes());
 
             if(p.size()>0) podios.merge(p.get(0).getNombre(),1,Integer::sum); // 1 lugar
             if(p.size()>1) podios.merge(p.get(1).getNombre(),1,Integer::sum); // 2 lugar
@@ -75,9 +76,17 @@ public class EstadisticaControlador {
                 .min(Comparator.comparingDouble(e -> e.getValue().stream().mapToDouble(d -> d).average().orElse(Double.MAX_VALUE)))
                 .map(Map.Entry::getKey).orElse("Ninguno");
 
-        double promedio = tiempos.get(masRapido).stream().mapToDouble(d->d).average().orElse(0);
+        if(!tiempos.containsKey(masRapido)){
+            vista.labelPomedio.setText("Ninguno");
+        } else {
+            double promedio = tiempos.get(masRapido)
+                    .stream()
+                    .mapToDouble(d -> d)
+                    .average()
+                    .orElse(0);
 
-        vista.labelPomedio.setText(masRapido + " (" + String.format("%.2f",promedio) + " min)");
+            vista.labelPomedio.setText(masRapido + " (" + String.format("%.2f", promedio) + " min)");
+        }
 
 
         //Tiempo promedio general
@@ -87,7 +96,10 @@ public class EstadisticaControlador {
 
         int totalParticipaciones = tiempos.values().stream().mapToInt(List::size).sum();
 
-        double promedioGeneral = totalTiempos / totalParticipaciones;
+        double promedioGeneral = totalParticipaciones == 0
+                ? 0
+                : totalTiempos / totalParticipaciones;
+
         vista.labelGeneral.setText(String.format("%.2f min",promedioGeneral));
 
 

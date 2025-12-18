@@ -197,5 +197,6 @@ public class CarreraControlador {
         frame.revalidate();
         frame.repaint();
     }
+
 }
 

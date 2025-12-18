@@ -13,10 +13,9 @@ public class Estadisticas {
     public JLabel labelPomedio;
     public JLabel labelGeneral;
     public JLabel LabelTotal;
-    public JPanel mainPanel;
 
 
     public JPanel getMainPanel() {
-        return this.mainPanel;
+        return this.Estadisticas;
     }
 }
